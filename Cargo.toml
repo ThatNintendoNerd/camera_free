@@ -1,0 +1,27 @@
+[package]
+name = "camera_free"
+version = "1.0.0"
+authors = ["ThatNintendoNerd"]
+edition = "2021"
+
+[package.metadata.skyline]
+titleid = "01006A800016E000"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+skyline = { git = "https://github.com/ultimate-research/skyline-rs.git" }
+smash = { git = "https://github.com/blu-dev/smash-rs" }
+smash_stage = { path = "../smash_stage" }
+bitflags = "2.4.1"
+hash40 = "1.3.1"
+once_cell = "1.19.0"
+parking_lot = "0.12.1"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+lto = true
