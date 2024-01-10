@@ -96,9 +96,9 @@ impl CameraMeleeFreeController {
         param.vr_camera_position_max.x = f32::NAN;
         param.vr_camera_position_max.y = f32::NAN;
         param.vr_camera_position_max.z = f32::INFINITY;
-        param.x19055f6c69 = 0.0;
-        param.x1a81d93bab = 0.0;
-        param.x1ae11c9f14 = 0.0;
+        param.vr_mode_notice_range_side = 0.0;
+        param.vr_mode_notice_range_upper = 0.0;
+        param.vr_mode_notice_range_lower = 0.0;
     }
 
     /// Sets the unrestricted pause camera parameters.
