@@ -24,47 +24,47 @@ impl Offsets {
                 text,
                 CAMERA_MELEE_REPLAY_CONTROLLER_UPDATE_SEARCH_CODE,
             )
-            .unwrap_or(0x4F7AE0),
+            .unwrap_or(0x4F7B00),
             camera_melee_replay_controller_distance_limit_check: Self::find(
                 text,
                 CAMERA_MELEE_REPLAY_CONTROLLER_DISTANCE_LIMIT_CHECK_SEARCH_CODE,
             )
-            .unwrap_or(0x4F9518),
+            .unwrap_or(0x4F953C),
             camera_melee_replay_controller_fov_check: Self::find(
                 text,
                 CAMERA_MELEE_REPLAY_CONTROLLER_FOV_CHECK_SEARCH_CODE,
             )
-            .unwrap_or(0x4FA448),
+            .unwrap_or(0x4FA468),
             camera_melee_photo_controller_fov_check: Self::find(
                 text,
                 CAMERA_MELEE_PHOTO_CONTROLLER_FOV_CHECK_SEARCH_CODE,
             )
-            .unwrap_or(0x50AD90),
+            .unwrap_or(0x50ADB0),
             camera_melee_photo_controller_update: Self::find(
                 text,
                 CAMERA_MELEE_PHOTO_CONTROLLER_UPDATE_SEARCH_CODE,
             )
-            .unwrap_or(0x50AE80),
+            .unwrap_or(0x50AEA0),
             camera_melee_photo_controller_distance_limit_check: Self::find(
                 text,
                 CAMERA_MELEE_PHOTO_CONTROLLER_DISTANCE_LIMIT_CHECK_SEARCH_CODE,
             )
-            .unwrap_or(0x50CF60),
+            .unwrap_or(0x50CF80),
             camera_melee_photo_controller_is_order: Self::find(
                 text,
                 CAMERA_MELEE_PHOTO_CONTROLLER_IS_ORDER_SEARCH_CODE,
             )
-            .unwrap_or(0x50D390),
+            .unwrap_or(0x50D3B0),
             stage_camera_normal_param_read: Self::find(
                 text,
                 STAGE_CAMERA_NORMAL_PARAM_READ_SEARCH_CODE,
             )
-            .unwrap_or(0x26207F0),
+            .unwrap_or(0x2621470),
             stage_camera_pause_param_read: Self::find(
                 text,
                 STAGE_CAMERA_PAUSE_PARAM_READ_SEARCH_CODE,
             )
-            .unwrap_or(0x26226B0),
+            .unwrap_or(0x2623330),
         }
     }
 
