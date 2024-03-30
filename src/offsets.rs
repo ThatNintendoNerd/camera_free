@@ -1,5 +1,6 @@
 use once_cell::sync::Lazy;
 
+/// The container for cached offsets to code.
 pub struct Offsets {
     pub camera_melee_replay_controller_update: usize,
     pub camera_melee_replay_controller_distance_limit_check: usize,
@@ -13,6 +14,7 @@ pub struct Offsets {
 }
 
 impl Offsets {
+    /// Constructs a new instance of `Offsets`.
     fn new() -> Self {
         let text = text();
 
@@ -65,17 +67,20 @@ impl Offsets {
         }
     }
 
+    /// Returns a reference to a `Lazy` containing the current instance of `Offsets`.
     pub fn get() -> &'static Lazy<Self> {
         static INSTANCE: Lazy<Offsets> = Lazy::new(Offsets::new);
 
         &INSTANCE
     }
 
-    fn find(haystack: &[u8], search_code: (&[u8], isize)) -> Option<usize> {
-        find_subsequence(haystack, search_code.0).map(|o| (o as isize + search_code.1) as usize)
+    /// Returns the offset to the needle in the haystack, or `None` if it was not found.
+    fn find(haystack: &[u8], needle: (&[u8], isize)) -> Option<usize> {
+        find_subsequence(haystack, needle.0).map(|o| (o as isize + needle.1) as usize)
     }
 }
 
+/// Returns a byte slice representing the code segment of the target application.
 fn text() -> &'static [u8] {
     use std::slice;
 
@@ -89,6 +94,7 @@ fn text() -> &'static [u8] {
     }
 }
 
+/// Returns the offset to the needle in the haystack, or `None` if it was not found.
 fn find_subsequence(haystack: &[u8], needle: &[u8]) -> Option<usize> {
     haystack
         .windows(needle.len())
