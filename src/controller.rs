@@ -1,5 +1,4 @@
 use hash40::{hash40, Hash40};
-use once_cell::sync::OnceCell;
 use parking_lot::Mutex;
 use smash_stage::{
     app::{StageCameraNormalParam, StageCameraPauseParam},
@@ -8,17 +7,17 @@ use smash_stage::{
 
 use crate::app::{ButtonCheckType, CameraMeleePhotoController, CameraMeleeReplayController};
 
-/// A type for freeing a camera controller of its restrictions.
+/// The controller for freeing a camera controller of its restrictions.
 pub struct CameraMeleeFreeController {
-    /// The current working camera position.
+    /// The working camera position.
     work_pos: phx::Vector3f,
 
-    /// The current working camera distance from the pivot point.
+    /// The working camera distance from the pivot point.
     work_distance: f32,
 }
 
 impl CameraMeleeFreeController {
-    /// Constructs a new instance of [`CameraMeleeFreeController`].
+    /// Constructs a new instance of `CameraMeleeFreeController`.
     fn new() -> Self {
         Self {
             work_pos: Default::default(),
@@ -26,14 +25,16 @@ impl CameraMeleeFreeController {
         }
     }
 
-    /// Returns a `Mutex` containing the current instance of [`CameraMeleeFreeController`].
+    /// Returns a reference to a `Mutex` containing the current instance of `CameraMeleeFreeController`.
     pub fn instance() -> &'static Mutex<Self> {
+        use once_cell::sync::OnceCell;
+
         static INSTANCE: OnceCell<Mutex<CameraMeleeFreeController>> = OnceCell::new();
 
         INSTANCE.get_or_init(|| Mutex::new(Self::new()))
     }
 
-    /// Updates the camera based on current game variables.
+    /// Updates the camera based on the current game state.
     pub fn update(&self, camera: &mut impl Camera) {
         if Self::is_reset(camera) {
             return;
