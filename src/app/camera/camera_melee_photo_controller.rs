@@ -4,7 +4,7 @@ use hash40::Hash40;
 use smash::cpp;
 use smash_stage::{lib::ParameterResource, phx};
 
-use crate::{app::ButtonCheckType, offsets::OFFSETS};
+use crate::{app::ButtonCheckType, offsets::Offsets};
 
 #[repr(C)]
 pub struct CameraMeleePhotoController {
@@ -77,7 +77,7 @@ pub struct CameraMeleePhotoController {
 
 impl CameraMeleePhotoController {
     pub fn is_order_impl(&self, order: Hash40, check_type: ButtonCheckType) -> bool {
-        #[skyline::from_offset(OFFSETS.camera_melee_photo_controller_is_order)]
+        #[skyline::from_offset(Offsets::get().camera_melee_photo_controller_is_order)]
         fn is_order(
             this: *const CameraMeleePhotoController,
             order: Hash40,

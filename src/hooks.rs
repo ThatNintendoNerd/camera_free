@@ -3,10 +3,10 @@ use smash_stage::app::{StageCameraNormalParam, StageCameraPauseParam, StageParam
 use crate::{
     app::{CameraMeleePhotoController, CameraMeleeReplayController},
     controller::CameraMeleeFreeController,
-    offsets::OFFSETS,
+    offsets::Offsets,
 };
 
-#[skyline::hook(offset = OFFSETS.camera_melee_replay_controller_update)]
+#[skyline::hook(offset = Offsets::get().camera_melee_replay_controller_update)]
 fn camera_melee_replay_controller_update(camera: &mut CameraMeleeReplayController) {
     let prev_pos = camera.pos;
     let prev_distance = camera.distance;
@@ -19,7 +19,7 @@ fn camera_melee_replay_controller_update(camera: &mut CameraMeleeReplayControlle
     instance.update(camera);
 }
 
-#[skyline::hook(offset = OFFSETS.camera_melee_photo_controller_update)]
+#[skyline::hook(offset = Offsets::get().camera_melee_photo_controller_update)]
 fn camera_melee_photo_controller_update(camera: &mut CameraMeleePhotoController) {
     let prev_pos = camera.pos;
     let prev_distance = camera.distance;
@@ -32,7 +32,7 @@ fn camera_melee_photo_controller_update(camera: &mut CameraMeleePhotoController)
     instance.update(camera);
 }
 
-#[skyline::hook(offset = OFFSETS.stage_camera_normal_param_read)]
+#[skyline::hook(offset = Offsets::get().stage_camera_normal_param_read)]
 fn stage_camera_normal_param_read(
     accessor: &StageParamAccessor,
     param: &mut StageCameraNormalParam,
@@ -42,7 +42,7 @@ fn stage_camera_normal_param_read(
     CameraMeleeFreeController::set_normal_camera_param(param);
 }
 
-#[skyline::hook(offset = OFFSETS.stage_camera_pause_param_read)]
+#[skyline::hook(offset = Offsets::get().stage_camera_pause_param_read)]
 fn stage_camera_pause_param_read(accessor: &StageParamAccessor, param: &mut StageCameraPauseParam) {
     original!()(accessor, param);
 

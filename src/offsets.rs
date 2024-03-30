@@ -1,7 +1,4 @@
 use once_cell::sync::Lazy;
-use skyline::hooks::{getRegionAddress, Region};
-
-pub static OFFSETS: Lazy<Offsets> = Lazy::new(Offsets::new);
 
 pub struct Offsets {
     pub camera_melee_replay_controller_update: usize,
@@ -68,6 +65,12 @@ impl Offsets {
         }
     }
 
+    pub fn get() -> &'static Lazy<Self> {
+        static INSTANCE: Lazy<Offsets> = Lazy::new(Offsets::new);
+
+        &INSTANCE
+    }
+
     fn find(haystack: &[u8], search_code: (&[u8], isize)) -> Option<usize> {
         find_subsequence(haystack, search_code.0).map(|o| (o as isize + search_code.1) as usize)
     }
@@ -75,6 +78,8 @@ impl Offsets {
 
 fn text() -> &'static [u8] {
     use std::slice;
+
+    use skyline::hooks::{getRegionAddress, Region};
 
     unsafe {
         let ptr = getRegionAddress(Region::Text) as *const u8;
