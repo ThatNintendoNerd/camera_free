@@ -76,7 +76,9 @@ impl Offsets {
 
     /// Returns the offset to the needle in the haystack, or `None` if it was not found.
     fn find(haystack: &[u8], needle: (&[u8], isize)) -> Option<usize> {
-        find_subsequence(haystack, needle.0).map(|o| (o as isize + needle.1) as usize)
+        use memchr::memmem;
+
+        memmem::find(haystack, needle.0).map(|o| (o as isize + needle.1) as usize)
     }
 }
 
@@ -92,13 +94,6 @@ fn text() -> &'static [u8] {
 
         slice::from_raw_parts(ptr, len)
     }
-}
-
-/// Returns the offset to the needle in the haystack, or `None` if it was not found.
-fn find_subsequence(haystack: &[u8], needle: &[u8]) -> Option<usize> {
-    haystack
-        .windows(needle.len())
-        .position(|window| window == needle)
 }
 
 #[rustfmt::skip]
