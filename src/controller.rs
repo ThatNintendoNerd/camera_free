@@ -18,20 +18,19 @@ pub struct CameraMeleeFreeController {
 
 impl CameraMeleeFreeController {
     /// Constructs a new instance of `CameraMeleeFreeController`.
-    fn new() -> Self {
+    const fn new() -> Self {
         Self {
-            work_pos: Default::default(),
-            work_distance: Default::default(),
+            work_pos: phx::Vector3f::ZERO,
+            work_distance: 0.0,
         }
     }
 
     /// Returns a reference to a `Mutex` containing the current instance of `CameraMeleeFreeController`.
     pub fn instance() -> &'static Mutex<Self> {
-        use once_cell::sync::OnceCell;
+        static INSTANCE: Mutex<CameraMeleeFreeController> =
+            Mutex::new(CameraMeleeFreeController::new());
 
-        static INSTANCE: OnceCell<Mutex<CameraMeleeFreeController>> = OnceCell::new();
-
-        INSTANCE.get_or_init(|| Mutex::new(Self::new()))
+        &INSTANCE
     }
 
     /// Updates the camera based on the current game state.
