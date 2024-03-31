@@ -1,4 +1,4 @@
-use hash40::{hash40, Hash40};
+use hash40::Hash40;
 use parking_lot::Mutex;
 use smash_stage::{
     app::{StageCameraNormalParam, StageCameraPauseParam},
@@ -45,11 +45,11 @@ impl CameraMeleeFreeController {
 
     /// Returns `true` if either of the reset orders have been executed.
     fn is_reset(camera: &impl Camera) -> bool {
-        if camera.is_order(hash40("reset"), ButtonCheckType::Press) {
+        if camera.is_order(Hash40::new("reset"), ButtonCheckType::Press) {
             return true;
         }
 
-        if camera.is_order(hash40("reset_2"), ButtonCheckType::Press) {
+        if camera.is_order(Hash40::new("reset_2"), ButtonCheckType::Press) {
             return true;
         }
 
